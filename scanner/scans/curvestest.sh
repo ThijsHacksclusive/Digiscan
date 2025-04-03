@@ -1,8 +1,13 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 input_file="filtered_output.csv"
 check_file="testssl_eisen/Elliptic_curves.csv"
 output_file="testssl_results_csvverzameling/curve_results.csv"
+
+OS="${2:-unknown}"  # Optional second argument for OS type
+echo "Running curve test on OS: $OS"
+echo "Input file: $input_file"
+echo "Output file: $output_file"
 
 echo "curve,ip,result" > "$output_file"
 
@@ -23,10 +28,14 @@ get_result() {
   local norm_curve="$1"
   while IFS=';' read -r name goed uit_te_faseren onvoldoende; do
     if [[ "$name" == "$norm_curve" ]]; then
-      if [[ "$goed" == "X" ]]; then echo "Goed"
-      elif [[ "$uit_te_faseren" == "X" ]]; then echo "Uit te faseren"
-      elif [[ "$onvoldoende" == "X" ]]; then echo "Onvoldoende"
-      else echo "Onvoldoende"
+      if [[ "$goed" =~ [Xx] ]]; then
+        echo "Goed"
+      elif [[ "$uit_te_faseren" =~ [Xx] ]]; then
+        echo "Uit te faseren"
+      elif [[ "$onvoldoende" =~ [Xx] ]]; then
+        echo "Onvoldoende"
+      else
+        echo "Onvoldoende"
       fi
       return
     fi

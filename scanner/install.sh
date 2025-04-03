@@ -23,20 +23,20 @@ detect_os
 case "$OS" in
   ubuntu|debian)
     echo "📦 Installing dependencies with apt..."
-    sudo apt update
-    sudo apt install -y curl git ffuf
+    #sudo apt update
+    #sudo apt install -y curl git ffuf
     ;;
   fedora|centos|rhel)
     echo "📦 Installing dependencies with dnf/yum..."
-    sudo dnf install -y curl git ffuf || sudo yum install -y curl git ffuf
+    #sudo dnf install -y curl git ffuf || sudo yum install -y curl git ffuf
     ;;
   arch)
     echo "📦 Installing dependencies with pacman..."
-    sudo pacman -Sy --noconfirm curl git ffuf
+    #sudo pacman -Sy --noconfirm curl git ffuf
     ;;
   macos)
     echo "📦 Installing dependencies with Homebrew..."
-    brew install curl git ffuf
+    #brew install curl git ffuf
     ;;
   *)
     echo "❌ Unsupported OS: $OS"
@@ -47,7 +47,7 @@ esac
 # Step 3: Clone testssl.sh if missing
 if [ ! -d "testssl.sh" ]; then
   echo "⬇️ Cloning testssl.sh..."
-  git clone --depth 1 https://github.com/drwetter/testssl.sh.git testssl.sh
+  #git clone --depth 1 https://github.com/drwetter/testssl.sh.git testssl.sh
 fi
 
 # Step 4: Make scripts executable

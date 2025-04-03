@@ -1,42 +1,42 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
-website_url=$1
-scan_type=$2
+website_url="$1"
+scan_type="$2"
+OS="$3"  # Passed from main script
 
-# Read OS type from file (created by install.sh)
-if [ -f .os_type ]; then
-    OS=$(cat .os_type)
-else
+# Fallback if not passed
+if [ -z "$OS" ]; then
     OS="unknown"
 fi
 
-# Terminal launch command based on OS
 launch_cmd() {
     local cmd="$1"
 
     case "$OS" in
-        ubuntu|debian|fedora|centos|rhel|arch)
-            # On Linux: launch in gnome-terminal (fallback to inline)
-            if command -v gnome-terminal &> /dev/null; then
-                gnome-terminal -- bash -c "$cmd; read -p 'Press enter to close...'"
-            else
-                echo "⚠️ gnome-terminal not found. Running inline:"
-                bash -c "$cmd"
-            fi
+        wsl|linux|ubuntu|debian|fedora|centos|rhel|arch)
+            # Headless: run inline
+            echo "▶ Running inline (no terminal GUI in $OS):"
+            bash -c "$cmd"
             ;;
         macos)
-            # On macOS: use Terminal.app (or iTerm)
+            # macOS Terminal
             osascript -e "tell application \"Terminal\" to do script \"$cmd; read -p 'Press enter to close...'\""
             ;;
         *)
-            # Default to wt.exe (assume WSL or Windows)
-            wt.exe --window last new-tab bash -ic "$cmd"
+            # Default fallback (Windows Terminal if available)
+            if command -v wt.exe &> /dev/null; then
+                wt.exe --window last new-tab bash -ic "$cmd"
+            else
+                echo "⚠️ No GUI terminal found. Running inline:"
+                bash -c "$cmd"
+            fi
             ;;
     esac
 }
 
+
 # Dispatch based on scan type
-case $scan_type in 
+case "$scan_type" in 
     1) 
         launch_cmd "cd scans && echo $website_url && bash ./testssl_scans.sh $website_url" &
         launch_cmd "cd scans && echo $website_url && bash ./HTTP_method_scanner.sh $website_url" &
