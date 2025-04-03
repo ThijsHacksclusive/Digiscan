@@ -1,2 +1,0 @@
-"id","fqdn/ip","port","severity","finding","cve","cwe"
-"engine_problem","/","443","WARN","No engine or GOST support via engine with your /usr/bin/openssl","",""
