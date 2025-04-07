@@ -60,7 +60,8 @@ echo "3) Port scan"
 echo "4) Option 4"
 echo "5) Option 5 ffuf"
 echo "6) Edit Audit Settings (does NOT require a website)"
-read "Enter your choices: choices"
+prinft "Enter your choices: "
+read choices
 
 choices_array=($choices)
 
@@ -85,7 +86,8 @@ if [[ ${#choices_array[@]} -gt 0 ]]; then
 
     echo "Enter website URLs (any format), one per line. Type 'done' when finished."
     while true; do
-        read "Enter a website URL: " website_url
+        printf "Enter a website URL: "
+        read website_url
         if [[ "$website_url" == "done" ]]; then
             break
         fi
