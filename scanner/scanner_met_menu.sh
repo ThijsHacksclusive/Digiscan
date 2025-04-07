@@ -60,7 +60,7 @@ echo "3) Port scan"
 echo "4) Option 4"
 echo "5) Option 5 ffuf"
 echo "6) Edit Audit Settings (does NOT require a website)"
-read "Enter your choices: " choices
+read "Enter your choices: choices"
 
 choices_array=($choices)
 
