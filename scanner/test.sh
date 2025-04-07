@@ -20,7 +20,7 @@ launch_cmd() {
             ;;
         macos)
             # macOS Terminal
-            osascript -e "tell application \"Terminal\" to do script \"$cmd; read -p 'Press enter to close...'\""
+            osascript -e "tell application \"Terminal\" to do script \"$cmd""
             ;;
         *)
             # Default fallback (Windows Terminal if available)
@@ -43,13 +43,13 @@ case "$scan_type" in
         launch_cmd "cd scans && echo $website_url && bash ./portscan.sh $website_url"
         ;;
     2)
-        launch_cmd "cd scans && echo $website_url && bash ./testssl_scans.sh $website_url && ./nog_een_test.sh $website_url && ./CSP_check.sh && ./curvestest.sh && ./ff_groupstest.sh && ./maxage.sh && ./OCSP_stapling_check.sh && ./Referrer_policy.sh && ./RSA_keysize_check.sh && ./Secure_renego.sh && ./X_Content_Type_Options.sh && ./alles_bij_elkaar.sh"
+        launch_cmd "cd scans && echo $website_url && bash ./testssl_scans.sh $website_url && ./nog_een_test.sh $website_url && ./CSP_check.sh && ./curvestest.sh && ./ff_groupstest.sh && ./maxage.sh && ./OCSP_stapling_check.sh && ./Referrer_policy.sh && ./RSA_keysize_check.sh && ./Secure_renego.sh && ./X_Content_Type_Options.sh && ./alles_bij_elkaar.sh && echo "Enter name" && read name && echo $name"
         ;;
     3)
         launch_cmd "cd scans && echo $website_url && bash ./HTTP_method_scanner.sh $website_url"
         ;;
     4)
-        launch_cmd "cd scans && echo $website_url && bash ./portscan.sh $website_url"
+        launch_cmd "cd scans && echo $website_url && bash ./portscan.sh $website_url "
         ;;
     5)
         launch_cmd "cd scans && echo $website_url && bash ./ffuf_scan.sh $website_url" &
