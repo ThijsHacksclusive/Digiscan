@@ -9,6 +9,17 @@ if [ -z "$OS" ]; then
     OS="unknown"
 fi
 
+launch_cmd(){
+    case "$OS" in
+        macos)
+            osascript -e "tell application \"Terminal\" to do script \"$cmd\""
+            ;;
+        *)
+            continue
+    esac
+
+}
+
 case "$OS" in
     wsl)
         case $scan_type in 
@@ -47,7 +58,7 @@ case "$OS" in
                 ;;
             2)
                 if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
-                    osascript -e "tell application \"Terminal\" to do script \"cd Digiscan && cd scanner && cd scans && echo $website_url && bash ./testssl_scans.sh $website_url && ./nog_een_test.sh $website_url && ./CSP_check.sh && ./curvestest.sh && ./ff_groupstest.sh && ./maxage.sh && ./OCSP_stapling_check.sh && ./Referrer_policy.sh && ./RSA_keysize_check.sh && ./Secure_renego.sh && ./X_Content_Type_Options.sh && ./alles_bij_elkaar.sh\" in front window"
+                    launch_cmd "cd Digiscan && cd scanner && cd scans && echo $website_url && bash ./testssl_scans.sh $website_url && ./nog_een_test.sh $website_url && ./CSP_check.sh && ./curvestest.sh && ./ff_groupstest.sh && ./maxage.sh && ./OCSP_stapling_check.sh && ./Referrer_policy.sh && ./RSA_keysize_check.sh && ./Secure_renego.sh && ./X_Content_Type_Options.sh && ./alles_bij_elkaar.sh"
                 elif [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then 
                     osascript <<EOF
 tell application "iTerm2"
