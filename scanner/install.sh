@@ -36,22 +36,12 @@ case "$OS" in
     ;;
   macos)
     echo "📦 Installing dependencies with Homebrew..."
-    brew install curl git ffuf
+    #brew install curl git ffuf
     ;;
   *)
     echo "❌ Unsupported OS: $OS"
     exit 1
     ;;
 esac
-
-# Step 3: Clone testssl.sh if missing
-if [ ! -d "testssl.sh" ]; then
-  echo "⬇️ Cloning testssl.sh..."
-  git clone --depth 1 https://github.com/drwetter/testssl.sh.git testssl.sh
-fi
-
-# Step 4: Make scripts executable
-chmod +x scanner_met_menu.sh test.sh
-chmod +x scans/*.sh
 
 echo "✅ Setup complete. Use ./scanner_met_menu.sh to start."
