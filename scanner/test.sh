@@ -59,6 +59,7 @@ tell application "iTerm2"
     end tell
 end tell
 EOF
+                fi
                 ;;
             3)
                 osascript -e "cd Digiscan && cd scanner && cd scans && echo $website_url && bash ./HTTP_method_scanner.sh $website_url"
@@ -88,4 +89,4 @@ EOF
         fi
         ;;
 esac
-}
+
