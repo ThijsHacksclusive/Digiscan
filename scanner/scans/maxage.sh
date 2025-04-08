@@ -27,7 +27,7 @@ while IFS= read -r line; do
         cache_control=$(echo "$line" | cut -d',' -f3 | tr -d '"')
 
         ip="$fqdn_ip"
-        s_max_age=$(echo "$cache_control" | grep -oP 's-maxage=\K[0-9]+')
+        s_max_age=$(echo "$cache_control" | awk -F's-maxage=' '{if (NF>1) print $2}' | grep -o '^[0-9]\+')
 
         echo "s-maxage: $s_max_age,$ip,$(classify_age "$s_max_age")" >> "$output_file"
     fi
