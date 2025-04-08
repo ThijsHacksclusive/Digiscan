@@ -20,7 +20,7 @@ launch_cmd() {
             ;;
         macos)
             # macOS Terminal
-            osascript -e "tell application \"Terminal\" to do script \"$cmd""
+            osascript -e "tell application \"Terminal\" to do script \"$cmd\""
             ;;
         *)
             # Default fallback (Windows Terminal if available)
