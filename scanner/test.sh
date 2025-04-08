@@ -57,15 +57,16 @@ case "$OS" in
                 launch_cmd "cd scans && echo $website_url && bash ./portscan.sh $website_url"
                 ;;
             2)
+                cmd="cd Digiscan && cd scanner && cd scans && echo $website_url && bash ./testssl_scans.sh $website_url && ./nog_een_test.sh $website_url && ./CSP_check.sh && ./curvestest.sh && ./ff_groupstest.sh && ./maxage.sh && ./OCSP_stapling_check.sh && ./Referrer_policy.sh && ./RSA_keysize_check.sh && ./Secure_renego.sh && ./X_Content_Type_Options.sh && ./alles_bij_elkaar.sh"
                 if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then
-                    launch_cmd "cd Digiscan && cd scanner && cd scans && echo $website_url && bash ./testssl_scans.sh $website_url && ./nog_een_test.sh $website_url && ./CSP_check.sh && ./curvestest.sh && ./ff_groupstest.sh && ./maxage.sh && ./OCSP_stapling_check.sh && ./Referrer_policy.sh && ./RSA_keysize_check.sh && ./Secure_renego.sh && ./X_Content_Type_Options.sh && ./alles_bij_elkaar.sh"
+                    launch_cmd
                 elif [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then 
                     osascript <<EOF
 tell application "iTerm2"
     tell current window
         create tab with default profile
         tell current session
-            write text "cd Digiscan && cd scanner && cd scans && echo $website_url && bash ./testssl_scans.sh $website_url && ./nog_een_test.sh $website_url && ./CSP_check.sh && ./curvestest.sh && ./ff_groupstest.sh && ./maxage.sh && ./OCSP_stapling_check.sh && ./Referrer_policy.sh && ./RSA_keysize_check.sh && ./Secure_renego.sh && ./X_Content_Type_Options.sh && ./alles_bij_elkaar.sh"
+            write text "$cmd"
         end tell
     end tell
 end tell
