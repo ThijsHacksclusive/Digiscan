@@ -9,8 +9,8 @@ Bash-based toolkit for web application auditing using `testssl.sh`, `ffuf`, `cur
 Clone the project and run the install script:
 
 ```bash
-git clone https://github.com/YOUR-USERNAME/scanner.git
-cd scanner
+git clone https://github.com/ThijsHacksclusive/Digiscan.git; chmod -R +x Digiscan/; cd Digiscan; cd scanner
+
 ./install.sh
 
 #  scanner/
