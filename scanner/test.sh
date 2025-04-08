@@ -63,10 +63,38 @@ EOF
                 fi
                 ;;
             3)
-                osascript -e "cd Digiscan && cd scanner && cd scans && echo $website_url && bash ./HTTP_method_scanner.sh $website_url"
+                cmd="cd Digiscan && cd scanner && cd scans && echo $website_url && bash ./HTTP_method_scanner.sh $website_url"
+                if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then 
+                    osascript -e "tell application \"Terminal\" to do script \"$cmd\""
+                elif [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then 
+                    osascript <<EOF
+tell application "iTerm2"
+    tell current window
+        create tab with default profile
+        tell current session
+            write text "$cmd"
+        end tell
+    end tell
+end tell
+EOF
+                fi
                 ;;
             4)
-                launch_cmd "cd Digiscan && cd scanner && cd scans && echo $website_url && bash ./portscan.sh $website_url "
+                cmd="cd Digiscan && cd scanner && cd scans && echo $website_url && bash ./portscan.sh $website_url"
+                if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then 
+                    osascript -e "tell application \"Terminal\" to do script \"$cmd\""
+                elif [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then 
+                    osascript <<EOF
+tell application "iTerm2"
+    tell current window
+        create tab with default profile
+        tell current session
+            write text "$cmd"
+        end tell
+    end tell
+end tell
+EOF
+                fi
                 ;;
             5)
                 launch_cmd "cd Digiscan && cd scanner && cd scans && echo $website_url && bash ./ffuf_scan.sh $website_url" &
