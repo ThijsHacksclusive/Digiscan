@@ -40,6 +40,7 @@ launch_cmd() {
                     echo "Invalid scan type: $scan_type"
                     ;;
             esac
+            ;;
         macos)
             # macOS Terminal
             osascript -e "tell application \"Terminal\" to do script \"$cmd\""
