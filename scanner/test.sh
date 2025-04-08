@@ -53,7 +53,8 @@ tell application "Terminal"
     do script "$cmd" in front window
 end tell
 EOF
-                    osascript -e "tell application \"Terminal\" to do script \"$cmd\""
+fi
+                    #osascript -e "tell application \"Terminal\" to do script \"$cmd\""
                 elif [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then 
                     osascript <<EOF
 tell application "iTerm2"
@@ -65,7 +66,7 @@ tell application "iTerm2"
     end tell
 end tell
 EOF
-                fi
+fi
                 ;;
             3)
                 osascript -e "cd Digiscan && cd scanner && cd scans && echo $website_url && bash ./HTTP_method_scanner.sh $website_url"
