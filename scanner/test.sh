@@ -13,10 +13,10 @@ launch_cmd() {
     local cmd="$1"
 
     case "$OS" in
-        wsl|linux|ubuntu|debian|fedora|centos|rhel|arch)
+        wsl)
             # Headless: run inline
             echo "▶ Running inline (no terminal GUI in $OS):"
-            bash -c "$cmd"
+            wt -w 0 cmd
             ;;
         macos)
             # macOS Terminal
