@@ -26,17 +26,8 @@ case "$OS" in
     #sudo apt update
     #sudo apt install -y curl git ffuf
     ;;
-  fedora|centos|rhel)
-    echo "📦 Installing dependencies with dnf/yum..."
-    #sudo dnf install -y curl git ffuf || sudo yum install -y curl git ffuf
-    ;;
-  arch)
-    echo "📦 Installing dependencies with pacman..."
-    #sudo pacman -Sy --noconfirm curl git ffuf
-    ;;
   macos)
-    echo "📦 Installing dependencies with Homebrew..."
-    #brew install curl git ffuf
+    chmod -R +x Digiscan/; cd Digiscan; cd scanner; chmod +x ttab; sudo mv ttab /usr/local/bin/; cd ~/Digiscan/scanner; ./scanner_met_menu.sh
     ;;
   *)
     echo "❌ Unsupported OS: $OS"
