@@ -58,7 +58,13 @@ case "$OS" in
             2)
                 cmd="cd Digiscan && cd scanner && cd scans && echo $website_url && bash ./testssl_scans.sh $website_url && ./nog_een_test.sh $website_url && ./CSP_check.sh && ./curvestest.sh && ./ff_groupstest.sh && ./maxage.sh && ./OCSP_stapling_check.sh && ./Referrer_policy.sh && ./RSA_keysize_check.sh && ./Secure_renego.sh && ./X_Content_Type_Options.sh && ./alles_bij_elkaar.sh"
                 if [[ "$TERM_PROGRAM" == "Apple_Terminal" ]]; then 
-                    launch_cmd
+                    osascript <<EOF
+tell application "Terminal"
+    activate
+    set currentWindow to front window
+    do script "echo Hello from new tab" in currentWindow
+end tell
+EOF
                 elif [[ "$TERM_PROGRAM" == "iTerm.app" ]]; then 
                     osascript <<EOF
 tell application "iTerm2"
